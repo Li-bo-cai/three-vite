@@ -6,7 +6,7 @@
 import * as THREE from 'three'
 
 // 创建了场景
-const scene = new THREE.Scene('#scene')
+const scene = new THREE.Scene()
 // 创建了相机
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
 // 创建了渲染器

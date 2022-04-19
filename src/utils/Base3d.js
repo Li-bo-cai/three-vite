@@ -56,7 +56,7 @@ class Base3d {
         this.container.appendChild(this.renderer.domElement)
     }
     setEnvMap(hdr) {
-        new RGBELoader().setPath('./files/hdr/').load(hdr + '.hdr', (texture) => {
+        new RGBELoader().setPath('./').load(hdr + '.hdr', (texture) => {
             texture.mapping = THREE.EquirectangularReflectionMapping;
             this.scene.background = texture;
             this.scene.environment = texture
