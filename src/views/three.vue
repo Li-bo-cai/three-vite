@@ -8,18 +8,20 @@
 import * as THREE from 'three'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
+// 导入控制器
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { nextTick } from 'vue';
 
 // 创建了场景
 const scene = new THREE.Scene();
 // 创建了相机
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerWidth, 0.1, 3000)
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerWidth, 0.1, 4000)
 // 创建了渲染器
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight)
 
 // 相机位置 
-camera.position.set(300, 0, 1000);
+camera.position.set(250, 20, 1000);
 // camera.lookAt(0, 0, 0)
 
 // 定义材质
@@ -45,12 +47,16 @@ loader.load('../../node_modules/three/examples/fonts/helvetiker_bold.typeface.js
         container.appendChild(renderer.domElement);
         renderer.render(scene, camera);
     })
+    function initControls() {
+        new OrbitControls(camera, renderer.domElement)
+    }
     function animate() {
         requestAnimationFrame(animate);
-        mesh.rotation.x += 0.01;
+        // mesh.rotation.x += 0.01;
         // mesh.rotation.y += 0.01;
         renderer.render(scene, camera);
     }
+    initControls()
     animate();
 });
 
