@@ -3,6 +3,7 @@
   <router-link to="/two">跳转到2</router-link>
   <router-link to="/three">跳转到3</router-link>
   <router-link to="/four">跳转到4</router-link>
+  <router-link to="/five">跳转到5</router-link>
   <router-view></router-view>
 </template>
 
