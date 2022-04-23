@@ -5,6 +5,8 @@
   <router-link to="/four">跳转到4</router-link>
   <router-link to="/five">跳转到5</router-link>
   <router-link to="/six">跳转到6</router-link>
+  <router-link to="/seven">跳转到7</router-link>
+  <router-link to="/eight">跳转到最新实现类</router-link>
   <router-view></router-view>
 </template>
 
