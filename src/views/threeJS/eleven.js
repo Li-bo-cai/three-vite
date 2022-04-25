@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-class Eight3d {
+class Eleven3d {
     constructor(selector) {
         this.container = document.querySelector(selector)
         this.scene
@@ -42,27 +42,23 @@ class Eight3d {
         this.container.appendChild(this.renderer.domElement)
     }
     addMesh() {
-        let geometry = new THREE.BufferGeometry()
-        let p1 = new THREE.Vector3(0, 0, 0); //顶点1坐标
-        let p2 = new THREE.Vector3(0, 100, 0); //顶点2坐标
-        let p3 = new THREE.Vector3(50, 0, 0); //顶点3坐标
-        let p4 = new THREE.Vector3(0, 0, 100); //顶点4坐标
-
-        let pointArray = []
-        pointArray.push(p1, p2, p3, p4);
-
-        geometry.setFromPoints(pointArray) //传入顶点数组
-
-        let indexes = new Uint32Array([0, 1, 2, 0, 2, 3])
-        geometry.index = new THREE.BufferAttribute(indexes, 1)
-        // 三角面(网格)渲染模式
+        let geometry = new THREE.BoxGeometry(100, 100, 100) //创建一个立方体几何对象Geometry
+        // // 遍历几何体的face属性
+        // geometry.faces.forEach(face => {
+        //     // 设置三角面face三个顶点的颜色
+        //     face.vertexColors = [
+        //         new THREE.Color(0xffff00),
+        //         new THREE.Color(0xff00ff),
+        //         new THREE.Color(0x00ffff),
+        //     ]
+        // });
         let material = new THREE.MeshBasicMaterial({
-            color: 0x0000ff, //三角面颜色
-            // vertexColors: THREE.VertexColors, //以定点颜色为准
-            side: THREE.DoubleSide, //点对象像素尺寸 两面可见
-        }); //材质对象
-        // console.log(geometry);
-        let mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
+            // color: 0x0000ff,
+            vertexColors: THREE.FaceColors,
+            // wireframe:true,//线框模式渲染
+        }); //材质对象Material
+
+        let mesh = new THREE.Mesh(geometry, material)
         this.scene.add(mesh)
     }
     addPoint() {
@@ -86,4 +82,4 @@ class Eight3d {
     }
 }
 
-export default Eight3d
+export default Eleven3d
