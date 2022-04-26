@@ -89,10 +89,11 @@ function initModule() {
     0, 1, 0, //顶点5法向量
     0, 1, 0, //顶点6法向量
   ]);
+  console.log(color);
   // 访问几何体顶点位置数据
   geometry.attributes.position = new THREE.BufferAttribute(vertices, 3); //3个为一组，表示一个顶点的xyz坐标
   // 访问几何体顶点颜色数据
-  // geometry.attributes.color = new THREE.BufferAttribute(color, 3)   //顶点颜色设置
+  geometry.attributes.color = new THREE.BufferAttribute(color, 3)   //顶点颜色设置
   // 访问几何体顶点法向量数据
   geometry.attributes.normal = new THREE.BufferAttribute(normals, 3); //3个为一组,表示一个顶点的法向量数据
   // 三角面(网格)渲染模式
@@ -101,6 +102,7 @@ function initModule() {
     // vertexColors: THREE.VertexColors,
     side: THREE.DoubleSide, //点对象像素尺寸
   }); //材质对象
+  console.log(geometry);
   let mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
   scene.add(mesh); //点对象添加到场景中
 

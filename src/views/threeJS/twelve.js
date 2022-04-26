@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-class Eleven3d {
+class Twelve3d {
     constructor(selector) {
         this.container = document.querySelector(selector)
         this.scene
@@ -28,7 +28,7 @@ class Eleven3d {
         // let s = 200; //三维场景显示范围控制系数，系数越大，显示的范围越大
         // this.camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
         this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000)
-        this.camera.position.set(150, 100, 300)
+        this.camera.position.set(500, 200, 500)
         this.camera.lookAt(0, 0, 0)
     }
     initRenderer() {
@@ -42,28 +42,19 @@ class Eleven3d {
         this.container.appendChild(this.renderer.domElement)
     }
     addMesh() {
-        let geometry = new THREE.BoxGeometry(100, 100, 100) //创建一个立方体几何对象Geometry
-        console.log(geometry);
-
-        let arr = []
-        geometry.attributes.position.array.forEach((item, index) => {
-            if (index % 9 == 0) {
-                arr = arr.concat(new THREE.Color('#f80').toArray())
-            }
-            if (index % 6 == 0) {
-                arr = arr.concat(new THREE.Color('#f00').toArray())
-            }
-            if (index % 3 == 0) {
-                arr = arr.concat(new THREE.Color('#f60').toArray())
-            }
-        })
-        let color = new Float32Array([...arr])
-        // console.log(color);
-        geometry.attributes.color = new THREE.BufferAttribute(color, 3)
+        let geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
+        // 几何体xyz三个方向都放大2倍
+        geometry.scale(2, 2, 2);
+        // 几何体沿着x轴平移50
+        geometry.translate(50, 0, 0);
+        // 几何体绕着x轴旋转45度
+        geometry.rotateX(Math.PI / 4);
+        // 居中：偏移的几何体居中
+        geometry.center();
 
         let material = new THREE.MeshBasicMaterial({
-            // color: 0x0000ff,
-            vertexColors: THREE.DstColorFactor,
+            color: 0x0000ff,
+            // vertexColors: THREE.DstColorFactor,
             // wireframe:true,//线框模式渲染
         }); //材质对象Material
 
@@ -91,4 +82,4 @@ class Eleven3d {
     }
 }
 
-export default Eleven3d
+export default Twelve3d
