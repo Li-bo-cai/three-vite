@@ -43,7 +43,16 @@ class Eleven3d {
     }
     addMesh() {
         let geometry = new THREE.BoxGeometry(100, 100, 100) //创建一个立方体几何对象Geometry
-        // // 遍历几何体的face属性
+        // console.log(color, new THREE.Color('#f60'));
+        let color = new Float32Array(
+            geometry.attributes.position.array.forEach((item, index) => {
+                return new THREE.Color('#f60')
+            })
+        )
+        geometry.attributes.color = new THREE.BufferAttribute(color, 3)
+        console.log(geometry);
+        // 遍历几何体的face属性
+
         // geometry.faces.forEach(face => {
         //     // 设置三角面face三个顶点的颜色
         //     face.vertexColors = [
@@ -52,9 +61,10 @@ class Eleven3d {
         //         new THREE.Color(0x00ffff),
         //     ]
         // });
+
         let material = new THREE.MeshBasicMaterial({
             // color: 0x0000ff,
-            vertexColors: THREE.FaceColors,
+            vertexColors: THREE.DstColorFactor,
             // wireframe:true,//线框模式渲染
         }); //材质对象Material
 
