@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-class Thirteen3d {
+class Fourteen3d {
     constructor(selector) {
         this.container = document.querySelector(selector)
         this.scene
@@ -38,27 +38,38 @@ class Thirteen3d {
         // 渲染的尺寸大小
         this.renderer.setSize(window.innerWidth, window.innerHeight)
         //设置背景颜色
-        // this.renderer.setClearColor(0xb9d3ff, 1);
+        this.renderer.setClearColor(0xb9d3ff, 1);
         this.container.appendChild(this.renderer.domElement)
     }
     addMesh() {
+        // let geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
+        // let material = new THREE.MeshBasicMaterial({
+        //     color: new THREE.Color('#f60'),
+        // })
+        // let mesh = new THREE.Mesh(geometry, material)
+        // let mash1 = mesh.clone()
+        // mash1.translateX(150)
+        // mash1.translateY(150)
+        // mash1.translateZ(150)
+        // this.scene.add(mesh, mash1)
+
         let geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
+        let geometry1 = new THREE.BoxGeometry().copy(geometry)
 
-        // 点渲染模式
-        // let material = new THREE.PointsMaterial({
-        //     color: "#f00",
-        //     size: 5.0
-        // })  
-        // let mesh = new THREE.Points(geometry, material) //点模型对象
+        let material = new THREE.MeshBasicMaterial({
+            color: new THREE.Color('#f60'),
+        })
 
+        let material1 = new THREE.MeshBasicMaterial().copy(material)
 
-        // 线条渲染模式
-        var material = new THREE.LineBasicMaterial({
-            color: 0xff0000 //线条颜色
-        });
-        let mesh = new THREE.Line(geometry, material)  //线条模型对象
+        let mesh = new THREE.Mesh(geometry, material)
+        let mesh1 = new THREE.Mesh(geometry1, material1)
 
-        this.scene.add(mesh)
+        mesh1.scale.x = 1.5
+        mesh1.position.y = 200;
+        mesh1.translateX(100);//沿着x轴正方向平移距离100
+
+        this.scene.add(mesh,mesh1)
     }
     addPoint() {
         //点光源
@@ -81,4 +92,4 @@ class Thirteen3d {
     }
 }
 
-export default Thirteen3d
+export default Fourteen3d
