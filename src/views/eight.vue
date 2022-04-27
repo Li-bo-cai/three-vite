@@ -6,8 +6,9 @@
 import Eight3d from "./threeJS/eight";
 import Nine3d from "./threeJS/nine";
 import Ten3d from "./threeJS/ten";
-import Eleven3d from './threeJS/eleven'
-import Twelve3d from './threeJS/twelve'
+import Eleven3d from "./threeJS/eleven";
+import Twelve3d from "./threeJS/twelve";
+import Thirteen3d from "./threeJS/thirteen";
 import { onMounted } from "vue";
 
 onMounted(() => {
@@ -15,7 +16,8 @@ onMounted(() => {
   // new Nine3d('#scene')
   // new Ten3d('#scene')
   // new Eleven3d('#scene')
-  new Twelve3d('#scene')
+  // new Twelve3d("#scene");
+  new Thirteen3d("#scene");
 });
 </script>
 

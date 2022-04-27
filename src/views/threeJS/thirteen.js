@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-class Twelve3d {
+class Thirteen3d {
     constructor(selector) {
         this.container = document.querySelector(selector)
         this.scene
@@ -43,24 +43,7 @@ class Twelve3d {
     }
     addMesh() {
         let geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
-        // 几何体xyz三个方向都放大2倍
-        geometry.scale(2, 2, 2);
-        // 几何体沿着x轴平移50
-        geometry.translate(50, 0, 0);
-        // 几何体绕着x轴旋转45度
-        geometry.rotateX(Math.PI / 4);
-        // 居中：偏移的几何体居中
-        geometry.center();
-        let material = new THREE.MeshPhongMaterial({
-            color: new THREE.Color('#fff'),
-            // vertexColors: THREE.DstColorFactor,
-            // wireframe:true,//线框模式渲染
-            // side: THREE.FrontSide, // 前面FrontSide  背面：BackSide 双面：DoubleSide
-            transparent: true, // transparent设置为true，开启透明，否则opacity不起作用
-            opacity: 0.8,
-        }); //材质对象Material
-        let mesh = new THREE.Mesh(geometry, material)
-        this.scene.add(mesh)
+    
     }
     addPoint() {
         //点光源
@@ -83,4 +66,4 @@ class Twelve3d {
     }
 }
 
-export default Twelve3d
+export default Thirteen3d
