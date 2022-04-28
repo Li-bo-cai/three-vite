@@ -10,6 +10,7 @@ import Eleven3d from "./threeJS/eleven";
 import Twelve3d from "./threeJS/twelve";
 import Thirteen3d from "./threeJS/thirteen";
 import Fourteen3d from "./threeJS/fourteen";
+import Fifteen3d from "./threeJS/fifteen";
 import { onMounted } from "vue";
 
 onMounted(() => {
@@ -19,7 +20,8 @@ onMounted(() => {
   // new Eleven3d('#scene')
   // new Twelve3d("#scene");
   // new Thirteen3d("#scene");
-  new Fourteen3d('#scene')
+  // new Fourteen3d("#scene");
+  new Fifteen3d("#scene");
 });
 </script>
 
