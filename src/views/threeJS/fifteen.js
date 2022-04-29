@@ -70,26 +70,40 @@ class Fifteen3d {
         this.scene.add(mesh, planeMesh)
     }
     addPoint() {
-        //点光源
-        let point = new THREE.DirectionalLight(0xffffff, 1);
-        point.position.set(50, 100, 20); //点光源位置
-        // 设置用于计算阴影的光源对象
-        point.castShadow = true;
+        // //点光源
+        // let point = new THREE.DirectionalLight(0xffffff, 1);
+        // point.position.set(50, 100, 20); //点光源位置
+        // // 设置用于计算阴影的光源对象
+        // point.castShadow = true;
 
-        // 设置计算阴影的区域，最好刚好紧密包围在对象周围
-        // 计算阴影的区域过大：模糊  过小：看不到或显示不完整
-        point.shadow.camera.near = 0.5;
-        point.shadow.camera.far = 260;
-        point.shadow.camera.left = -50;
-        point.shadow.camera.right = 50;
-        point.shadow.camera.top = 200;
-        point.shadow.camera.bottom = -100;
-        this.scene.add(point); //点光源添加到场景中
+        // // 设置计算阴影的区域，最好刚好紧密包围在对象周围
+        // // 计算阴影的区域过大：模糊  过小：看不到或显示不完整
+        // point.shadow.camera.near = 0.5;
+        // point.shadow.camera.far = 260;
+        // point.shadow.camera.left = -50;
+        // point.shadow.camera.right = 50;
+        // point.shadow.camera.top = 200;
+        // point.shadow.camera.bottom = -100;
+        // this.scene.add(point); //点光源添加到场景中
+
+        // 聚光光源
+        var spotLight = new THREE.SpotLight(0xffffff);
+        // 设置聚光光源位置
+        spotLight.position.set(120, 100, 40);
+        // 设置聚光光源发散角度
+        spotLight.angle = Math.PI / 6
+        this.scene.add(spotLight); //光对象添加到scene场景中
+        // 设置用于计算阴影的光源对象
+        spotLight.castShadow = true;
+        // 设置计算阴影的区域，注意包裹对象的周围
+        spotLight.shadow.camera.near = 0.5;
+        spotLight.shadow.camera.far = 300;
+        spotLight.shadow.camera.fov = 20;
         // 设置mapSize属性可以使阴影更清晰，不那么模糊
         // point.shadow.mapSize.set(1024,1024)
         // //环境光
-        let ambient = new THREE.AmbientLight(0x444444);
-        this.scene.add(ambient);
+        // let ambient = new THREE.AmbientLight(0x444444);
+        // this.scene.add(ambient);
     }
     render() {
         this.renderer.render(this.scene, this.camera)
