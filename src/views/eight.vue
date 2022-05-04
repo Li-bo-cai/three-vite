@@ -11,6 +11,7 @@ import Twelve3d from "./threeJS/twelve";
 import Thirteen3d from "./threeJS/thirteen";
 import Fourteen3d from "./threeJS/fourteen";
 import Fifteen3d from "./threeJS/fifteen";
+import sixteen3d from './threeJS/sixteen'
 import { onMounted } from "vue";
 
 onMounted(() => {
@@ -21,7 +22,8 @@ onMounted(() => {
   // new Twelve3d("#scene");
   // new Thirteen3d("#scene");
   // new Fourteen3d("#scene");
-  new Fifteen3d("#scene");
+  // new Fifteen3d("#scene");
+  new sixteen3d('#scene')
 });
 </script>
 
