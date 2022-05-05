@@ -3,15 +3,16 @@
 </template>
 
 <script setup>
-import Eight3d from "./threeJS/eight";
-import Nine3d from "./threeJS/nine";
-import Ten3d from "./threeJS/ten";
-import Eleven3d from "./threeJS/eleven";
-import Twelve3d from "./threeJS/twelve";
-import Thirteen3d from "./threeJS/thirteen";
-import Fourteen3d from "./threeJS/fourteen";
-import Fifteen3d from "./threeJS/fifteen";
-import sixteen3d from './threeJS/sixteen'
+import Eight3d from "./eightThreeJS/eight";
+import Nine3d from "./eightThreeJS/nine";
+import Ten3d from "./eightThreeJS/ten";
+import Eleven3d from "./eightThreeJS/eleven";
+import Twelve3d from "./eightThreeJS/twelve";
+import Thirteen3d from "./eightThreeJS/thirteen";
+import Fourteen3d from "./eightThreeJS/fourteen";
+import Fifteen3d from "./eightThreeJS/fifteen";
+import Sixteen3d from "./eightThreeJS/sixteen";
+import Seventeen3d from "./eightThreeJS/seventeen";
 import { onMounted } from "vue";
 
 onMounted(() => {
@@ -23,7 +24,8 @@ onMounted(() => {
   // new Thirteen3d("#scene");
   // new Fourteen3d("#scene");
   // new Fifteen3d("#scene");
-  new sixteen3d('#scene')
+  // new Sixteen3d("#scene");
+  new Seventeen3d("#scene");
 });
 </script>
 

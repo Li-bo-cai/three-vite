@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { Group } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-class sixteen3d {
+class Sixteen3d {
     constructor(selector) {
         this.container = document.querySelector(selector)
         this.scene
@@ -80,4 +80,4 @@ class sixteen3d {
     }
 }
 
-export default sixteen3d
+export default Sixteen3d
