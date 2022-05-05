@@ -1,4 +1,6 @@
 import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry'
 
 class OneThree3d {
     constructor(selector) {
@@ -15,6 +17,7 @@ class OneThree3d {
         this.initRenderer()
         this.initMesh()
         this.initPoint()
+        this.initControls()
     }
     initScene() {
         this.scene = new THREE.Scene()
@@ -37,10 +40,22 @@ class OneThree3d {
         this.container.appendChild(this.renderer.domElement)
     }
     initMesh() {
-        let geometry = new THREE.BufferGeometry()// 声明几何体对象
+        // let geometry = new THREE.CircleGeometry(40, 100)// 声明几何体对象
         //参数：0, 0圆弧坐标原点x，y  100：圆弧半径    0, 2 * Math.PI：圆弧起始角度
         let arc = new THREE.ArcCurve(0, 0, 100, 0, 2 * Math.PI)
-        let points = arc.getPoint(50) //分段数50，返回51个顶点
+        // console.log(arc);
+        let points = arc.getPoints(99); //分段数50，返回51个顶点
+        // console.log(points);
+        // geometry.setFromPoints(points)
+        let shape = new THREE.Shape(points)
+        let arcGeometry = shape.makeGeometry()
+        let material = new THREE.LineBasicMaterial({
+            color: 0x000000
+        })
+
+        let line = new THREE.Line(arcGeometry, material)
+        console.log(line);
+        this.scene.add(line)
     }
     initPoint() {
         //点光源
@@ -53,6 +68,10 @@ class OneThree3d {
     }
     render() {
         this.renderer.render(this.scene, this.camera)
+    }
+    initControls() {
+        //创建控件对象
+        let controls = new OrbitControls(this.camera, this.renderer.domElement);
     }
     anmate() {
         this.renderer.setAnimationLoop(this.render.bind(this))
