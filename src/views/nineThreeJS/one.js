@@ -26,7 +26,7 @@ class OneThree3d {
         let width = window.innerWidth;
         let height = window.innerHeight;
         this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000)
-        this.camera.position.set(150, 100, 300)
+        this.camera.position.set(0, 0, 300)
         this.camera.lookAt(0, 0, 0)
     }
     initRenderer() {
@@ -40,21 +40,37 @@ class OneThree3d {
         this.container.appendChild(this.renderer.domElement)
     }
     initMesh() {
-        // let geometry = new THREE.CircleGeometry(40, 100)// 声明几何体对象
+        // //参数依次为圆的半径   三角面的数量   相对x轴的起始角度   圆形扇区的中心角
+        // let geometry = new THREE.CircleGeometry(100, 8, 1 / 6 * Math.PI, Math.PI)
+        // let material = new THREE.MeshBasicMaterial({
+        //     color: 0x000000
+        // })
+
+        let geometry = new THREE.BufferGeometry()// 声明几何体对象
         //参数：0, 0圆弧坐标原点x，y  100：圆弧半径    0, 2 * Math.PI：圆弧起始角度
         let arc = new THREE.ArcCurve(0, 0, 100, 0, 2 * Math.PI)
-        // console.log(arc);
-        let points = arc.getPoints(99); //分段数50，返回51个顶点
-        // console.log(points);
-        // geometry.setFromPoints(points)
-        let shape = new THREE.Shape(points)
-        let arcGeometry = shape.makeGeometry()
+        let points = arc.getPoints(100)
+        console.log(arc);
+        console.log(points);
+        geometry.setFromPoints(points)
+
         let material = new THREE.LineBasicMaterial({
             color: 0x000000
         })
 
-        let line = new THREE.Line(arcGeometry, material)
-        console.log(line);
+        // let arc = new THREE.ArcCurve(0, 0, 100, 0, 2 * Math.PI)
+        // let points = arc.getPoints(5); //分段数50，返回51个顶点
+        // console.log(points);
+        // let shape = new THREE.Shape(points)
+        // let arcGeometry = shape.makeGeometry()
+        // let material = new THREE.LineBasicMaterial({
+        //     color: 0x000000
+        // })
+
+        // let line = new THREE.Line(arcGeometry, material)
+
+        // 环线（LineLoop）  一条连续的线(Line)
+        let line = new THREE.Line(geometry, material)
         this.scene.add(line)
     }
     initPoint() {
