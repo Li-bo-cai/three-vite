@@ -29,7 +29,7 @@ function init() {
   // 创建控制器
   initControls();
   // 创建光源
-  initPoint();
+  initLight();
 }
 function initScene() {
   scene = new THREE.Scene();
@@ -74,7 +74,7 @@ function initModule() {
   scene.add(mesh1);
 }
 
-function initPoint() {
+function initLight() {
   //点光源
   let point = new THREE.PointLight("#f00");
   point.position.set(0, 200, 300); //点光源位置

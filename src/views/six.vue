@@ -5,7 +5,7 @@
 <script setup>
 import { onMounted } from "@vue/runtime-core";
 import * as THREE from "three";
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 let scene;
 let camera;
@@ -20,8 +20,8 @@ function init() {
   initCamera();
   initRenderer();
   initModule();
-  initPoint();
-  initControls()
+  initLight();
+  initControls();
 }
 function initScene() {
   scene = new THREE.Scene();
@@ -33,7 +33,12 @@ function initCamera() {
   let k = width / height; //窗口宽高比
   let s = 200; //三维场景显示范围控制系数，系数越大，显示的范围越大
   // camera = new THREE.PerspectiveCamera(-s * k, s * k, s, s, 1000);
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerWidth, 0.1, 1000)
+  camera = new THREE.PerspectiveCamera(
+    45,
+    window.innerWidth / window.innerWidth,
+    0.1,
+    1000
+  );
   camera.position.set(50, 100, 500);
   camera.lookAt(0, 0, 0);
 }
@@ -96,13 +101,12 @@ function initModule() {
 
   // 线条渲染模式
   let material = new THREE.LineBasicMaterial({
-    color: 0xff0000 //线条颜色
-  });//材质对象
-  let line = new THREE.Line(geometry, material);//线条模型对象
-  scene.add(line);//线条对象添加到场景中
-
+    color: 0xff0000, //线条颜色
+  }); //材质对象
+  let line = new THREE.Line(geometry, material); //线条模型对象
+  scene.add(line); //线条对象添加到场景中
 }
-function initPoint() { }
+function initLight() {}
 
 function render() {
   renderer.render(scene, camera);

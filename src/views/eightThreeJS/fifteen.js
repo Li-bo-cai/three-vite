@@ -16,7 +16,7 @@ class Fifteen3d {
         this.initRenderer();
         this.initControls()
         this.addMesh();
-        this.addPoint()
+        this.addLight()
     }
     initScene() {
         this.scene = new THREE.Scene();
@@ -69,7 +69,7 @@ class Fifteen3d {
 
         this.scene.add(mesh, planeMesh)
     }
-    addPoint() {
+    addLight() {
         // //点光源
         // let point = new THREE.DirectionalLight(0xffffff, 1);
         // point.position.set(50, 100, 20); //点光源位置

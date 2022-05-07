@@ -20,7 +20,7 @@ function init() {
   initCamera();
   initRenderer();
   initModule();
-  initPoint();
+  initLight();
   initControls()
 }
 function initScene() {
@@ -123,7 +123,7 @@ function initModule() {
   // scene.add(line);//线条对象添加到场景中
 
 }
-function initPoint() {
+function initLight() {
   //点光源
   let point = new THREE.PointLight("#f00");
   point.position.set(0, 100, 200); //点光源位置

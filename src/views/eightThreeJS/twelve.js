@@ -16,7 +16,7 @@ class Twelve3d {
         this.initRenderer();
         this.initControls()
         this.addMesh();
-        this.addPoint()
+        this.addLight()
     }
     initScene() {
         this.scene = new THREE.Scene();
@@ -62,7 +62,7 @@ class Twelve3d {
         let mesh = new THREE.Mesh(geometry, material)
         this.scene.add(mesh)
     }
-    addPoint() {
+    addLight() {
         //点光源
         let point = new THREE.PointLight("#f00");
         point.position.set(250, 20, 200); //点光源位置

@@ -16,7 +16,7 @@ class Nine3d {
         this.initRenderer();
         this.initControls();
         this.addMesh();
-        this.addPoint();
+        this.addLight();
     }
     initScene() {
         this.scene = new THREE.Scene();
@@ -76,7 +76,7 @@ class Nine3d {
         let mesh = new THREE.Mesh(this.geometry, material); //网格模型对象Mesh
         this.scene.add(mesh); //点对象添加到场景中
     }
-    addPoint() {
+    addLight() {
         //点光源
         let point = new THREE.PointLight("#f00");
         point.position.set(0, 100, 200); //点光源位置

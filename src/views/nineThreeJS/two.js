@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry'
 
-class OneThree3d {
+class TwoThree3d {
     constructor(selector) {
         this.container = document.querySelector(selector)
         this.scene
@@ -40,38 +40,53 @@ class OneThree3d {
         this.container.appendChild(this.renderer.domElement)
     }
     initMesh() {
-        // //参数依次为圆的半径   三角面的数量   相对x轴的起始角度   圆形扇区的中心角
-        // let geometry = new THREE.CircleGeometry(100, 8, 1 / 6 * Math.PI, Math.PI)
-        // let material = new THREE.MeshBasicMaterial({
-        //     color: 0x000000
+
+        // let geometry = new THREE.BufferGeometry()
+        // let geometry1 = new THREE.BufferGeometry()
+
+        // let pointArr = [
+        //     new THREE.Vector3(-50, 20, 90),
+        //     new THREE.Vector3(-10, 40, 40),
+        //     new THREE.Vector3(0, 0, 0),
+        //     new THREE.Vector3(60, -60, 0),
+        //     new THREE.Vector3(7, 0, 80)
+        // ]
+        // // 样条曲线
+        // let curve = new THREE.CatmullRomCurve3(pointArr)
+        // let points = curve.getPoints(100)  //分段数10，返回11个顶点
+        // geometry1.setFromPoints(pointArr)
+        // geometry.setFromPoints(points)
+        // let material = new THREE.PointsMaterial({
+        //     color: '#f60',
+        //     size: 5
         // })
+        // let line = new THREE.Line(geometry, material)
+        // let point = new THREE.Points(geometry1, material)
+        // this.scene.add(line, point)
 
-        let geometry = new THREE.BufferGeometry()// 声明几何体对象
-        //参数：0, 0圆弧坐标原点x，y  100：圆弧半径    0, 2 * Math.PI：圆弧起始角度
-        let arc = new THREE.ArcCurve(0, 0, 100, 0, 2 * Math.PI)
-        let points = arc.getPoints(100)
-        console.log(arc);
-        console.log(points);
-        geometry.setFromPoints(points)
-
+        let geometry = new THREE.BufferGeometry()
+        let R = 40;  //圆弧半径
+        let arc = new THREE.ArcCurve(0, 0, R, 0, Math.PI, true);
+        // 半圆弧的一个端点作为直线的一个端点
+        let line1 = new THREE.LineCurve(new THREE.Vector2(R, 100, 0), new THREE.Vector2(R, 0, 0));
+        let line2 = new THREE.LineCurve(new THREE.Vector2(-R, 0, 0), new THREE.Vector2(-R, 100, 0));
+        // 创建组合曲线对象CurvePath
+        let CurvePath = new THREE.CurvePath();
+        // 把多个线条插入到CurvePath中
+        CurvePath.curves.push(line1, arc, line2);
+        //分段数200
+        let points = CurvePath.getPoints(200);
+        // setFromPoints方法从points中提取数据改变几何体的顶点属性vertices
+        geometry.setFromPoints(points);
+        //材质对象
         let material = new THREE.LineBasicMaterial({
             color: 0x000000
-        })
+        });
+        //线条模型对象
+        let line = new THREE.Line(geometry, material);
+        this.scene.add(line); //线条对象添加到场景中
 
-        // let arc = new THREE.ArcCurve(0, 0, 100, 0, 2 * Math.PI)
-        // let points = arc.getPoints(5); //分段数50，返回51个顶点
-        // console.log(points);
-        // let shape = new THREE.Shape(points)
-        // let arcGeometry = shape.makeGeometry()
-        // let material = new THREE.LineBasicMaterial({
-        //     color: 0x000000
-        // })
 
-        // let line = new THREE.Line(arcGeometry, material)
-
-        // 环线（LineLoop）  一条连续的线(Line)
-        let line = new THREE.Line(geometry, material)
-        this.scene.add(line)
     }
     initLight() {
         //点光源
@@ -94,4 +109,4 @@ class OneThree3d {
     }
 }
 
-export default OneThree3d
+export default TwoThree3d

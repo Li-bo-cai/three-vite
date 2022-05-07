@@ -16,7 +16,7 @@ import Seventeen3d from "./eightThreeJS/seventeen";
 import { onMounted } from "vue";
 
 onMounted(() => {
-  // new Eight3d("#scene");
+  new Eight3d("#scene");
   // new Nine3d('#scene')
   // new Ten3d('#scene')
   // new Eleven3d('#scene')
@@ -25,7 +25,7 @@ onMounted(() => {
   // new Fourteen3d("#scene");
   // new Fifteen3d("#scene");
   // new Sixteen3d("#scene");
-  new Seventeen3d("#scene");
+  // new Seventeen3d("#scene");
 });
 </script>
 

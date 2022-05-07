@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry'
 
-class OneThree3d {
+class FourThree3d {
     constructor(selector) {
         this.container = document.querySelector(selector)
         this.scene
@@ -40,44 +40,32 @@ class OneThree3d {
         this.container.appendChild(this.renderer.domElement)
     }
     initMesh() {
-        // //参数依次为圆的半径   三角面的数量   相对x轴的起始角度   圆形扇区的中心角
-        // let geometry = new THREE.CircleGeometry(100, 8, 1 / 6 * Math.PI, Math.PI)
-        // let material = new THREE.MeshBasicMaterial({
-        //     color: 0x000000
-        // })
-
-        let geometry = new THREE.BufferGeometry()// 声明几何体对象
-        //参数：0, 0圆弧坐标原点x，y  100：圆弧半径    0, 2 * Math.PI：圆弧起始角度
-        let arc = new THREE.ArcCurve(0, 0, 100, 0, 2 * Math.PI)
-        let points = arc.getPoints(100)
-        console.log(arc);
-        console.log(points);
-        geometry.setFromPoints(points)
-
-        let material = new THREE.LineBasicMaterial({
-            color: 0x000000
-        })
-
-        // let arc = new THREE.ArcCurve(0, 0, 100, 0, 2 * Math.PI)
-        // let points = arc.getPoints(5); //分段数50，返回51个顶点
-        // console.log(points);
-        // let shape = new THREE.Shape(points)
-        // let arcGeometry = shape.makeGeometry()
-        // let material = new THREE.LineBasicMaterial({
-        //     color: 0x000000
-        // })
-
-        // let line = new THREE.Line(arcGeometry, material)
-
-        // 环线（LineLoop）  一条连续的线(Line)
-        let line = new THREE.Line(geometry, material)
-        this.scene.add(line)
+        /**
+        * 创建旋转网格模型
+        */
+        let points = [
+            new THREE.Vector2(50, 60),
+            new THREE.Vector2(25, 0),
+            new THREE.Vector2(50, -60)
+        ];
+        // points — 一个Vector2对象数组。每个点的X坐标必须大于0。
+        // segments — 要生成的车削几何体圆周分段的数量，默认值是12。
+        // phiStart — 以弧度表示的起始角度，默认值为0。
+        // phiLength — 车削部分的弧度（0-2PI）范围，2PI将是一个完全闭合的、完整的车削几何体，小于2PI是部分车削。默认值是2PI。
+        let geometry = new THREE.LatheGeometry(points, 30, 0, Math.PI);
+        let material = new THREE.MeshPhongMaterial({
+            color: 0x0000ff,//三角面颜色
+            side: THREE.DoubleSide//两面可见
+        });//材质对象
+        material.wireframe = true;//线条模式渲染(查看细分数)
+        let mesh = new THREE.Mesh(geometry, material);//旋转网格模型对象
+        this.scene.add(mesh);//旋转网格模型添加到场景中
     }
     initLight() {
-        //点光源
-        let point = new THREE.PointLight("#f00");
-        point.position.set(250, 20, 200); //点光源位置
-        this.scene.add(point); //点光源添加到场景中
+        // //点光源
+        // let point = new THREE.PointLight("#f00");
+        // point.position.set(250, 20, 200); //点光源位置
+        // this.scene.add(point); //点光源添加到场景中
         //环境光
         let ambient = new THREE.AmbientLight(0x444444);
         this.scene.add(ambient);
@@ -94,4 +82,4 @@ class OneThree3d {
     }
 }
 
-export default OneThree3d
+export default FourThree3d

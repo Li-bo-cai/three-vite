@@ -16,7 +16,7 @@ class Fourteen3d {
         this.initRenderer();
         this.initControls()
         this.addMesh();
-        this.addPoint()
+        this.addLight()
     }
     initScene() {
         this.scene = new THREE.Scene();
@@ -71,7 +71,7 @@ class Fourteen3d {
 
         this.scene.add(mesh,mesh1)
     }
-    addPoint() {
+    addLight() {
         //点光源
         let point = new THREE.PointLight("#f00");
         point.position.set(250, 20, 200); //点光源位置

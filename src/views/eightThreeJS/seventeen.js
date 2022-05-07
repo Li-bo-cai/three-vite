@@ -16,7 +16,7 @@ class Seventeen3d {
         this.initRenderer();
         this.initControls()
         this.addMesh();
-        this.addPoint()
+        this.addLight()
     }
     initScene() {
         this.scene = new THREE.Scene();
@@ -126,7 +126,7 @@ class Seventeen3d {
         nameNode.material.color.set(0xff0000);
 
     }
-    addPoint() {
+    addLight() {
         //点光源
         // let point = new THREE.PointLight("#fff");
         // point.position.set(0, 100, 200); //点光源位置
