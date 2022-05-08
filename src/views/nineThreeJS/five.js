@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry'
 
-class FourThree3d {
+class FiveThree3d {
     constructor(selector) {
         this.container = document.querySelector(selector)
         this.scene
@@ -40,52 +40,43 @@ class FourThree3d {
         this.container.appendChild(this.renderer.domElement)
     }
     initMesh() {
-        // //创建旋转网格模型
-        // let points = [
-        //     new THREE.Vector2(50, 60),
-        //     new THREE.Vector2(25, 0),
-        //     new THREE.Vector2(50, -60)
-        // ];
-        // // points — 一个Vector2对象数组。每个点的X坐标必须大于0。
-        // // segments — 要生成的车削几何体圆周分段的数量，默认值是12。
-        // // phiStart — 以弧度表示的起始角度，默认值为0。
-        // // phiLength — 车削部分的弧度（0-2PI）范围，2PI将是一个完全闭合的、完整的车削几何体，小于2PI是部分车削。默认值是2PI。
-        // let geometry = new THREE.LatheGeometry(points, 12, 0, Math.PI);
-
-        let shape = new THREE.Shape();//创建Shape对象
-        //定位定点
         let points = [
-            new THREE.Vector2(10, 60),
-            new THREE.Vector2(25, 0),
-            new THREE.Vector2(50, -60)
-        ];
-        shape.splineThru(points);//顶点带入样条插值计算函数
-        let splinePoints = shape.getPoints(5);//插值计算细分数20
-        console.log(splinePoints);
-        let geometry = new THREE.LatheGeometry(splinePoints, 12, 0, Math.PI);//旋转造型
+            new THREE.Vector2(-50, -50),
+            new THREE.Vector2(-60, 0),
+            new THREE.Vector2(0, 50),
+            new THREE.Vector2(60, 0),
+            new THREE.Vector2(50, -50),
+            new THREE.Vector2(-50, -50),
+        ]
+        // 通过顶点定义轮廓
+        let shape = new THREE.Shape(points);  //Shape继承于Path  
+        // x, y -- 弧线的绝对中心。
+        // radius -- 弧线的半径。
+        // startAngle-- 起始角，以弧度来表示。
+        // endAngle-- 终止角，以弧度来表示。
+        // clockwise -- 以顺时针方向创建（扫过）弧线。默认值为false。
+        shape.absarc(0, 0, 60, 0, 2 * Math.PI, true)
+        console.log(shape.getPoints());
+        // shape可以理解为一个需要填充轮廓
+        // 所谓填充：ShapeGeometry算法利用顶点计算出三角面face3数据填充轮廓
+        let geometry = new THREE.ShapeGeometry(shape, 1);
 
-        let geometry2 = new THREE.BufferGeometry()
-        geometry2.setFromPoints([
-            new THREE.Vector3(10, 60, 0),
-            new THREE.Vector3(25, 0, 0),
-            new THREE.Vector3(50, -60, 0)
-        ])
+        let geometry1 = new THREE.BufferGeometry()
+        geometry1.setFromPoints([new THREE.Vector3(0, 0, 0)])
 
-        console.log(geometry2);
+        let material = new THREE.MeshBasicMaterial({
+            color: '#f60',
+            wireframe: true
+        })
 
-        let material = new THREE.MeshPhongMaterial({
-            color: 0x0000ff,//三角面颜色
-        });//材质对象
-
-        let material2 = new THREE.PointsMaterial({
+        let material1 = new THREE.PointsMaterial({
             color: '#f00',
             size: 5
         })
 
-        material.wireframe = true;//线条模式渲染(查看细分数)
-        let mesh = new THREE.Mesh(geometry, material);//旋转网格模型对象
-        let mesh2 = new THREE.Points(geometry2, material2)
-        this.scene.add(mesh, mesh2);//旋转网格模型添加到场景中
+        let mesh = new THREE.Mesh(geometry, material)
+        let mesh1 = new THREE.Points(geometry1, material1)
+        this.scene.add(mesh, mesh1)
 
     }
     initLight() {
@@ -109,4 +100,4 @@ class FourThree3d {
     }
 }
 
-export default FourThree3d
+export default FiveThree3d
