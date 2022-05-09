@@ -1,6 +1,4 @@
 import * as THREE from 'three'
-import { Vector2 } from 'three'
-import { BufferAttribute } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry'
 
@@ -44,9 +42,9 @@ class TwoThree3d {
     initMesh() {
         //矩形平面，细分数默认1，即2个三角形拼接成一个矩形
         let geometry = new THREE.BoxGeometry(100, 100, 100); //立方体
-
+        // let geometry = new THREE.SphereGeometry(60, 25, 25); //球体
         let uvArr = []
-        
+
         geometry.attributes.uv.array.forEach((elem, index) => {
             if (elem == 1 && index % 2 == 0) {
                 uvArr.push(0.7)
@@ -79,6 +77,7 @@ class TwoThree3d {
 
         // 排序方式是：右  左 上 下  前 后
         let mesh = new THREE.Mesh(geometry, [material1, material, material, material, material, material])
+        // let mesh = new THREE.Mesh(geometry, material)
         this.scene.add(mesh); //网格模型添加到场景中
     }
     initLight() {
