@@ -1,7 +1,6 @@
 import * as THREE from 'three'
-import { DoubleSide } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-class ThreeThree3d {
+class FourThree3d {
     constructor(selector) {
         this.container = document.querySelector(selector)
         this.scene
@@ -25,8 +24,8 @@ class ThreeThree3d {
         let width = window.innerWidth;
         let height = window.innerHeight;
         this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000)
-        this.camera.position.set(0, 0, 300)
-        this.camera.lookAt(0, 0, 0)
+        this.camera.position.set(100, 100, 300)
+        this.camera.lookAt(this.scene.position)
     }
     initRenderer() {
         this.renderer = new THREE.WebGLRenderer({ antialias: true })
@@ -39,27 +38,35 @@ class ThreeThree3d {
         this.container.appendChild(this.renderer.domElement)
     }
     initMesh() {
+        let geometry = new THREE.PlaneGeometry(128, 128); //矩形平面
+        /**
+         * 创建纹理对象的像素数据
+         */
+        let width = 32; //纹理宽度
+        let height = 32; //纹理高度
+        let size = width * height; //像素大小
+        let data = new Uint8Array(size * 4); //size*3：像素在缓冲区占用空间
+        console.log(data);
+        for (let i = 0; i < size * 4; i += 4) {
+            // 随机设置RGB分量的值
+            data[i] = 255 * Math.random()
+            data[i + 1] = 255 * Math.random()
+            data[i + 2] = 255 * Math.random()
+            // data[i + 3] = 0.1
+        }
+        console.log(data);
 
-        let video = document.createElement('video')
-        video.src = "./video/无关过往.mp4";
-        video.muted = true;
-        video.controls = true
-        console.log(video);
-        // video.autoplay = "autoplay";
-        video.play()
+        // 创建数据文理对象   RGB格式：THREE.RGBFormat
+        let texture = new THREE.DataTexture(data, width, height, THREE.RGBAFormat);
+        texture.needsUpdate = true; //纹理更新
+        //打印纹理对象的image属性
+        // console.log(texture.image);
 
-
-        let texture = new THREE.VideoTexture(video)
-
-        // let geometry = new THREE.PlaneGeometry(108, 71);
-        let geometry = new THREE.BoxGeometry(100, 100, 100)
-
-        let material = new THREE.MeshBasicMaterial({ map: texture, side: DoubleSide })
-
-        material.map = texture;
-        // mainObjcet.material = material;
-
-        let mesh = new THREE.Mesh(geometry, material)
+        let material = new THREE.MeshPhongMaterial({
+            map: texture, // 设置纹理贴图
+            side: THREE.DoubleSide
+        }); //材质对象Material
+        let mesh = new THREE.Mesh(geometry, material);
         this.scene.add(mesh)
     }
     initLight() {
@@ -83,4 +90,4 @@ class ThreeThree3d {
     }
 }
 
-export default ThreeThree3d
+export default FourThree3d
