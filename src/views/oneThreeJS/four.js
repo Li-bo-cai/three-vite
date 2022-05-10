@@ -16,6 +16,8 @@ class FourThree3d {
         this.initMesh()
         this.initLight()
         this.initControls()
+        // 监听场景大小改变，调整渲染尺寸
+        window.addEventListener("resize", this.onWindowResize.bind(this))
     }
     initScene() {
         this.scene = new THREE.Scene()
@@ -80,6 +82,11 @@ class FourThree3d {
     }
     render() {
         this.renderer.render(this.scene, this.camera)
+    }
+    onWindowResize() {
+        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(window.innerWidth, window.innerHeight)
     }
     initControls() {
         //创建控件对象

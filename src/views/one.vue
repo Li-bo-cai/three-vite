@@ -8,12 +8,14 @@ import OneThree3d from "./oneThreeJS/one";
 import TwoThree3d from "./oneThreeJS/two";
 import ThreeThree3d from "./oneThreeJS/three";
 import FourThree3d from "./oneThreeJS/four";
+import FiveThree3d from './oneThreeJS/five'
 
 onMounted(() => {
   // new OneThree3d("#scene");
   // new TwoThree3d("#scene");
   // new ThreeThree3d("#scene");
-  new FourThree3d("#scene");
+  // new FourThree3d("#scene");
+  new FiveThree3d('#scene')
 });
 </script>
 
