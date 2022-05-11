@@ -69,14 +69,16 @@ class FiveThree3d {
             let sprite = new THREE.Sprite(spriteMaterial);
             // this.scene.add(sprite);
             // 控制精灵大小,
-            sprite.scale.set(2, 10, 1); //// 只需要设置x、y两个分量就可以
+            sprite.scale.set(4, 10, 1); //// 只需要设置x、y两个分量就可以
             let k1 = Math.random();
             let k2 = Math.random();
             let k3 = Math.random();
             // 设置精灵模型位置，在整个空间上上随机分布
-            sprite.position.set(200 * k1, 200 * k3, 200 * k2)
+            sprite.position.set(window.innerWidth * k1, window.innerHeight * k3, 200 * k2)
             this.group.add(sprite)
         }
+        this.group.position.x = -window.innerWidth / 2
+        this.group.position.y = -window.innerHeight / 2
         this.scene.add(this.group)
         console.log(this.group);
     }
@@ -94,18 +96,14 @@ class FiveThree3d {
             sprite.position.y -= 1;
             sprite.position.x -= 1
             if (sprite.position.y < 0) {
-                sprite.position.y = 200
+                sprite.position.y = window.innerHeight
             }
             if (sprite.position.x < 0) {
-                sprite.position.x = 200
+                sprite.position.x = window.innerWidth
             }
         })
         this.renderer.render(this.scene, this.camera)
-        requestAnimationFrame(() => {
-            setTimeout(() => {
-                this.render.bind(this)
-            }, 500)
-        });//请求再次执行渲染函数render，渲染下一帧
+        requestAnimationFrame(this.render.bind(this));//请求再次执行渲染函数render，渲染下一帧
     }
     onWindowResize() {
         this.camera.aspect = window.innerWidth / window.innerHeight;
@@ -114,10 +112,11 @@ class FiveThree3d {
     }
     initControls() {
         //创建控件对象
-        let controls = new OrbitControls(this.camera, this.renderer.domElement);
+        // let controls = new OrbitControls(this.camera, this.renderer.domElement);
     }
     anmate() {
-        this.renderer.setAnimationLoop(this.render.bind(this))
+        this.render()
+        // this.renderer.setAnimationLoop(this.render.bind(this))
     }
 }
 
