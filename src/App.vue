@@ -12,6 +12,8 @@
 </template>
 
 <script setup>
+import appStore from './store'
+console.log(appStore);
 </script>
 
 <style>
