@@ -9,5 +9,4 @@ export const registerStore = () => {
         appStore[moduleName] = value.default()
     })
 }
-
 export default appStore
